@@ -11,15 +11,13 @@
 
     <AddBook v-if="showAddBook" @add-book="addBook" />
 
-    <div v-else>
-      <Books
-        v-if="books && books.length > 0"
-        @toggle-readIt="toggleReadIt"
-        @delete-book="deleteBook"
-        :books="books"
-      />
-      <p v-else>Empty Book List...</p>
-    </div>
+    <Books
+      v-if="books && books.length > 0"
+      @toggle-readIt="toggleReadIt"
+      @delete-book="deleteBook"
+      :books="books"
+    />
+    <p v-else>Empty Book List...</p>
   </div>
 </template>
 
