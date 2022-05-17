@@ -1,23 +1,23 @@
 <template>
-  <div
-    @dblclick="$emit('toggle-readIt', book.id)"
-    :class="[book.readIt ? 'readIt' : '', 'book']"
-  >
-    <div class="book-title">
-      <h3>
-        <i class="fa-solid fa-book icon"></i>
-        {{ book.title }}
-      </h3>
-      <div @click="$emit('delete-book', book.id)">
-        <i class="fa-solid fa-xmark"></i>
+  <div :class="[book.readIt ? 'readIt' : '', 'book']">
+    <img class="book-cover" :src="book.cover" />
+    <div class="book-details">
+      <div class="book-title">
+        <h3>
+          <i class="fa-solid fa-book icon"></i>
+          {{ book.title }}
+        </h3>
+        <div @click="$emit('delete-book', book.id)">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
       </div>
+      <p><i class="fa-solid fa-user icon"></i> {{ book.author }}</p>
+      <p><i class="fa-solid fa-hashtag icon"></i> {{ book.isbn }}</p>
+      <p @click="$emit('toggle-readIt', book.id)">
+        <i class="fa-solid fa-eye"></i>
+        {{ book.readIt ? "Already Read it" : "Haven't read it yet" }}
+      </p>
     </div>
-    <p><i class="fa-solid fa-user icon"></i> {{ book.author }}</p>
-    <p><i class="fa-solid fa-hashtag icon"></i> {{ book.isbn }}</p>
-    <p>
-      <i class="fa-solid fa-eye"></i>
-      {{ book.readIt ? "Already Read it" : "Haven't read it yet" }}
-    </p>
   </div>
 </template>
 
@@ -37,10 +37,23 @@ export default {
 .book {
   background: #f4f4f4;
   margin: 20px 5px;
-  padding: 10px 20px;
+
   cursor: pointer;
   position: relative;
   user-select: none;
+  display: flex;
+}
+
+.book-cover {
+  width: 140px;
+  object-fit: cover;
+}
+
+.book-details {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .book.readIt {
