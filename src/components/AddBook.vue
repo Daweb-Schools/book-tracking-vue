@@ -31,7 +31,7 @@
       <label for="readIt">I have read it already</label>
     </div>
 
-    <input type="submit" value="Save Book" class="btn btn-block" />
+    <button type="submit" class="btn btn-block">Save Book</button>
   </form>
 </template>
 
@@ -69,42 +69,9 @@ export default {
       this.isbn = "";
       this.readIt = false;
     },
+    getFile(e) {
+      console.log(e.target.files[0].mozFullPath);
+    },
   },
 };
 </script>
-
-<style scoped>
-.add-form {
-  margin-bottom: 40px;
-}
-.form-control {
-  margin: 20px 0;
-}
-.form-control label {
-  display: block;
-}
-.form-control input {
-  width: 100%;
-  height: 40px;
-  margin: 5px;
-  padding: 3px 7px;
-  font-size: 17px;
-}
-
-.form-control-check {
-  display: flex;
-  align-items: center;
-}
-.form-control-check label {
-  flex: 1;
-}
-.form-control-check input {
-  flex: 2;
-  height: 20px;
-}
-.form-control input[type="checkbox"] {
-  width: auto;
-  flex: unset;
-  height: 20px;
-}
-</style>

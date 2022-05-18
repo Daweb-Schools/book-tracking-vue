@@ -1,23 +1,31 @@
 <template>
   <div class="container">
-    <h1>📖 My Book List</h1>
-    <button
-      class="btn header-btn"
-      @click="toggleAddBook"
-      :style="{ background: showAddBook ? '#C73030' : '#34178c' }"
-    >
-      {{ showAddBook ? "Close x" : "Add Book +" }}
-    </button>
+    <h1>📖 {{ showAddBook ? "Add a new Book" : "My Book List" }}</h1>
+    <div class="header-btns">
+      <button
+        class="btn"
+        @click="toggleAddBook"
+        :style="{ background: showAddBook ? '#C73030' : '#34178c' }"
+      >
+        {{ showAddBook ? "Close x" : "Add Book +" }}
+      </button>
+      <button v-show="!showAddBook" class="btn" @click="updateView">
+        {{ view == "list" ? "Table View" : "List View" }}
+      </button>
+    </div>
 
-    <AddBook v-if="showAddBook" @add-book="addBook" />
+    <AddBook v-show="showAddBook" @add-book="addBook" />
 
-    <Books
-      v-if="books && books.length > 0"
-      @toggle-readIt="toggleReadIt"
-      @delete-book="deleteBook"
-      :books="books"
-    />
-    <p v-else>Empty Book List...</p>
+    <div v-show="!showAddBook" class="books-container">
+      <Books
+        v-if="books && books.length > 0"
+        @toggle-readIt="toggleReadIt"
+        @delete-book="deleteBook"
+        :books="books"
+        :view="view"
+      />
+      <p v-else>Empty Book List...</p>
+    </div>
   </div>
 </template>
 
@@ -34,12 +42,53 @@ export default {
   data() {
     return {
       showAddBook: false,
-      books: [],
+      view: "list", //table
+      books: [
+        {
+          id: 1,
+          title: "History of Europe",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-6-540x861.jpg",
+          isRead: true,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo",
+        },
+        {
+          id: 2,
+          title: "Penguin Classics",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-2-540x861.jpg",
+          isRead: false,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo, Jon Snow",
+        },
+        {
+          id: 3,
+          title: "Becoming",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-7-540x861.jpg",
+          isRead: false,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo",
+        },
+        {
+          id: 4,
+          title: "Sonnets",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-5-540x861.jpg",
+          isRead: false,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo",
+        },
+      ],
     };
   },
   methods: {
     toggleAddBook() {
       this.showAddBook = !this.showAddBook;
+    },
+    updateView() {
+      this.view = this.view === "list" ? "table" : "list";
     },
     deleteBook(id) {
       console.log(id);
@@ -61,15 +110,4 @@ export default {
 
 <style>
 @import "./assets/base.css";
-
-.container h1 {
-  margin-bottom: 20px;
-}
-.container .header-btn {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  margin: 0;
-  border-radius: 0 0 15px 15px;
-}
 </style>
