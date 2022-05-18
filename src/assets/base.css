@@ -85,7 +85,7 @@ input:focus {
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 18px;
   font-family: inherit;
 }
 .btn:focus {
