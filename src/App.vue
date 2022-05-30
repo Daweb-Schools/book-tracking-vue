@@ -90,19 +90,16 @@ export default {
     updateView() {
       this.view = this.view === "list" ? "table" : "list";
     },
-    deleteBook(id) {
-      console.log(id);
-      if (confirm("Are you sure?")) {
-        this.books = this.books.filter((book) => book.id !== id);
-      }
-    },
     toggleReadIt(id) {
-      this.books = this.books.map((book) =>
-        book.id === id ? { ...book, readIt: !book.readIt } : book
-      );
+      this.books = this.books.map((book) => {
+        if (book.id === id) {
+          book.isRead = !book.isRead;
+        }
+        return book;
+      });
     },
     addBook(book) {
-      this.books = [...this.books, book];
+      this.books.push(book);
     },
   },
 };

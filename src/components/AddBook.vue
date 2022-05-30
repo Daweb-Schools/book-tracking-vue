@@ -69,9 +69,6 @@ export default {
       this.isbn = "";
       this.readIt = false;
     },
-    getFile(e) {
-      console.log(e.target.files[0].mozFullPath);
-    },
   },
 };
 </script>
