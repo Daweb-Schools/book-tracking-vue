@@ -1,48 +1,36 @@
 <template>
   <div class="container">
-    <h1>📖 {{ showAddBook ? "Add a new Book" : "My Book List" }}</h1>
+    <h1>📖 My Book List</h1>
     <div class="header-btns">
       <button
         class="btn"
-        @click="toggleAddBook"
-        :style="{ background: showAddBook ? '#C73030' : '#34178c' }"
+        
       >
-        {{ showAddBook ? "Close x" : "Add Book +" }}
+        Add Book +
       </button>
-      <button v-show="!showAddBook" class="btn" @click="updateView">
-        {{ view == "list" ? "Table View" : "List View" }}
+      <button class="btn">
+        List View
       </button>
     </div>
 
-    <AddBook v-show="showAddBook" @add-book="addBook" />
 
-    <div v-show="!showAddBook" class="books-container">
-      <Books
-        v-if="books && books.length > 0"
-        @toggle-readIt="toggleReadIt"
-        @delete-book="deleteBook"
-        :books="books"
-        :view="view"
-      />
-      <p v-else>Empty Book List...</p>
+    <div class="books-container">
+      <!-- books list -->
     </div>
   </div>
 </template>
 
 <script>
-import Books from "./components/Books.vue";
-import AddBook from "./components/AddBook.vue";
 
 export default {
   name: "App",
   components: {
-    Books,
-    AddBook,
+    
   },
   data() {
     return {
       showAddBook: false,
-      view: "list", //table
+      view: "list",
       books: [
         {
           id: 1,
@@ -84,26 +72,7 @@ export default {
     };
   },
   methods: {
-    toggleAddBook() {
-      this.showAddBook = !this.showAddBook;
-    },
-    updateView() {
-      this.view = this.view === "list" ? "table" : "list";
-    },
-    deleteBook(id) {
-      console.log(id);
-      if (confirm("Are you sure?")) {
-        this.books = this.books.filter((book) => book.id !== id);
-      }
-    },
-    toggleReadIt(id) {
-      this.books = this.books.map((book) =>
-        book.id === id ? { ...book, readIt: !book.readIt } : book
-      );
-    },
-    addBook(book) {
-      this.books = [...this.books, book];
-    },
+    
   },
 };
 </script>
