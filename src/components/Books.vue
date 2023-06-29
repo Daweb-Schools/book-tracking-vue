@@ -22,11 +22,18 @@
           <td>{{ book.title }}</td>
           <td>{{ book.author }}</td>
           <td>{{ book.isbn }}</td>
-          <td>{{ book.isRead ? "Already Read it" : "Haven't read it yet" }}</td>
+          <td><input type="checkbox" id="checkbox" v-model="book.isRead" /></td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <div class="books-read">
+    <label for="file">Your Progress</label><br/>
+    <progress :class="{complete : this.booksReadPercent >= 100}" :value="booksReadPercent" max="100"> </progress>
+    <p>{{booksReadMesage}}</p>
+  </div>
+
 </template>
 
 <script>
@@ -41,5 +48,18 @@ export default {
     Book,
   },
   emits: ["toggleReadIt"],
+  computed: {
+    booksRead() {
+      return this.books.filter(book => book.isRead).length;
+    },
+    booksReadPercent() {
+      return Math.round(this.booksRead / this.books.length * 100);
+    },
+    booksReadMesage() {
+      return this.booksReadPercent >=100 
+      ? 'All the books were read. Congrats!' 
+      : `${this.booksRead} out of ${this.books.length} books were read`;
+    },
+  }
 };
 </script>

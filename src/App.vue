@@ -25,6 +25,9 @@
       />
       <p v-else>Empty Book List...</p>
     </div>
+    
+
+
   </div>
 </template>
 
@@ -100,7 +103,7 @@ export default {
     addBook(book) {
       this.books.push(book);
     },
-  },
+  }
 };
 </script>
 

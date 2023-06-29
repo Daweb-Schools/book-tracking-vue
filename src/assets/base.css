@@ -280,6 +280,11 @@ table tr th {
   gap: 20px;
 }
 
+.books-read {
+  padding-top: 60px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .books-list {
     grid-template-columns: 1fr 1fr;
