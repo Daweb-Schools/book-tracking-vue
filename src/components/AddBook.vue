@@ -27,7 +27,7 @@
       <input type="text" v-model="isbn" name="isbn" placeholder="Add ISBN" />
     </div>
     <div class="form-control form-control-check">
-      <input type="checkbox" v-model="readIt" name="readIt" id="readIt" />
+      <input type="checkbox" v-model="isRead" name="readIt" id="readIt" />
       <label for="readIt">I have read it already</label>
     </div>
 
@@ -44,7 +44,7 @@ export default {
       cover: "",
       author: "",
       isbn: "",
-      readIt: false,
+      isRead: false,
     };
   },
   methods: {
@@ -60,14 +60,14 @@ export default {
         cover: this.cover,
         author: this.author,
         isbn: this.isbn,
-        readIt: this.readIt,
+        isRead: this.isRead,
       };
       this.$emit("add-book", newBook);
       this.title = "";
       this.cover = "";
       this.author = "";
       this.isbn = "";
-      this.readIt = false;
+      this.isRead = false;
     },
   },
 };

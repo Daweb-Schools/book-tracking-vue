@@ -2,8 +2,7 @@
   <div v-if="view == 'list'" class="books-list">
     <div :key="book.id" v-for="book in books">
       <book
-        @toggle-readIt="$emit('toggle-readIt', book.id)"
-        @delete-book="$emit('delete-book', book.id)"
+        @toggle-readIt="$emit('toggleReadIt', book.id)"
         :book="book"
       />
     </div>
@@ -23,7 +22,7 @@
           <td>{{ book.title }}</td>
           <td>{{ book.author }}</td>
           <td>{{ book.isbn }}</td>
-          <td>{{ book.readIt ? "Already Read it" : "Haven't read it yet" }}</td>
+          <td>{{ book.isRead ? "Already Read it" : "Haven't read it yet" }}</td>
         </tr>
       </tbody>
     </table>
@@ -41,6 +40,6 @@ export default {
   components: {
     Book,
   },
-  emits: ["delete-book", "toggle-readIt"],
+  emits: ["toggleReadIt"],
 };
 </script>

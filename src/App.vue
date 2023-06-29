@@ -20,7 +20,6 @@
       <Books
         v-if="books && books.length > 0"
         @toggle-readIt="toggleReadIt"
-        @delete-book="deleteBook"
         :books="books"
         :view="view"
       />
